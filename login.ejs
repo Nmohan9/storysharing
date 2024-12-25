@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #0073e6;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      padding: 15px;
+    }
+
+    header .button {
+      background: white;
+      color: #0073e6;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    header .button:hover {
+      background: #f0f0f0;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form .submit-button {
+      background: #0073e6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form .submit-button:hover {
+      background: #005bb5;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .signup-link a {
+      color: #0073e6;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header style="background-image: linear-gradient(90deg, #0073e6, #00c6ff) ;">
+    <h1>Log In</h1>
+    <a href="/signup" class="button">Sign Up</a>
+  </header>
+
+  <main>
+    <form id="signInForm" action="/login" method="POST">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+
+      <button type="submit" class="submit-button">Log In</button>
+    </form>
+    <div class="signup-link">
+      <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
+  </main>
+</body>
+</html>

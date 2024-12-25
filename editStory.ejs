@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Story</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Edit Your Story</h1>
+    <a href="/" class="button">Home</a>
+  </header>
+
+  <main>
+    <form action="/edit-story/<%= story._id %>" method="POST">
+      <label for="title">Story Title:</label>
+      <input type="text" id="title" name="title" value="<%= story.title %>" required>
+
+      <label for="description">Story Description:</label>
+      <textarea id="description" name="description" rows="3" required><%= story.description %></textarea>
+
+      <label for="content">Story Content:</label>
+      <textarea id="content" name="content" rows="6" required><%= story.content %></textarea>
+
+      <label for="genre">Genre:</label>
+      <select id="genre" name="genre" class="genre-dropdown" required>
+        <option value="Action" <%= story.genre === "Action" ? "selected" : "" %>>Action</option>
+        <option value="Comedy" <%= story.genre === "Comedy" ? "selected" : "" %>>Comedy</option>
+        <option value="Drama" <%= story.genre === "Drama" ? "selected" : "" %>>Drama</option>
+        <option value="Fiction" <%= story.genre === "Fiction" ? "selected" : "" %>>Fiction</option>
+        <option value="Thriller" <%= story.genre === "Thriller" ? "selected" : "" %>>Thriller</option>
+        <option value="Documentary" <%= story.genre === "Documentary" ? "selected" : "" %>>Documentary</option>
+        <option value="Animation" <%= story.genre === "Animation" ? "selected" : "" %>>Animation</option>
+        <option value="War" <%= story.genre === "War" ? "selected" : "" %>>War</option>
+        <option value="Adventure" <%= story.genre === "Adventure" ? "selected" : "" %>>Adventure</option>
+        <option value="History" <%= story.genre === "History" ? "selected" : "" %>>History</option>
+        <option value="Horror" <%= story.genre === "Horror" ? "selected" : "" %>>Horror</option>
+        <option value="Mystery" <%= story.genre === "Mystery" ? "selected" : "" %>>Mystery</option>
+        <option value="Romance" <%= story.genre === "Romance" ? "selected" : "" %>>Romance</option>
+        <option value="Science Fiction" <%= story.genre === "Science Fiction" ? "selected" : "" %>>Science Fiction</option>
+        <!-- Add more genres as needed -->
+      </select>
+
+      <div>
+        <button type="submit" name="visibility" value="public" class="submit-button">Public</button>
+        <button type="submit" name="visibility" value="private" class="submit-button">Private</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

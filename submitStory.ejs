@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Story</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Submit Your Story</h1>
+    <a href="/" class="button">Home</a>
+  </header>
+
+  <main>
+    <form action="/submit-story" method="POST">
+      <label for="title">Story Title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="description">Story Description:</label>
+      <textarea id="description" name="description" rows="3" required></textarea>
+
+      <label for="content">Story Content:</label>
+      <textarea id="content" name="content" rows="6" required></textarea>
+
+      <label for="genre">Genre:</label>
+      <select id="genre" name="genre" class="genre-dropdown" required>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Documentary">Documentary</option>
+        <option value="Animation">Animation</option>
+        <option value="War">War</option>
+        <option value="Adventure">Adventure</option>
+        <option value="History">History</option>
+        <option value="Horror">Horror</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <!-- Add more genres as needed -->
+      </select>
+
+     
+
+      <div>
+        <button type="submit" name="visibility" value="public" class="submit-button">Public</button>
+        <button type="submit" name="visibility" value="private" class="submit-button">Private</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

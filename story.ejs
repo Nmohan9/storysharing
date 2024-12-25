@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <style>
+     .edit-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-image: linear-gradient(90deg, black, rgb(106, 147, 208));
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .edit-button:hover {
+      background-color: #218838;
+    }
+    .genre-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+  margin-top: 10px;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.genre-buttons::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.genre-button {
+  background-image: linear-gradient(to right, #273a90, #00BFFF); 
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.story-detail {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.story-detail h2 {
+  margin-top: 0;
+}
+
+.story-detail p {
+  line-height: 1.6;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="back">
+    <header style="position: relative; padding: 10px;">
+      <a href="/" style="text-decoration: none;">
+        <h1 style="color:#ffffff;">Story Sharing</h1>
+      </a>
+      <div style="position: absolute; top: 25px; right: 30px; display: flex; align-items: center; gap: 15px;">
+        <a href="/signup" class="button" style="color:#007bff; text-decoration: none; background-color: #ffffff; border: 1px solid white; border-radius: 5px; padding: 5px 10px;">Sign Up</a>
+        <a href="/login" class="button" style="color: #007bff; text-decoration: none; background-color: #ffffff; border: 1px solid white; border-radius: 5px; padding: 5px 10px;">Login</a>
+        <a href="/profile" style="display: inline-block; height: 40px; width: 40px; text-decoration: none;">
+          <img
+            src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3407.jpg?w=360"
+            alt="Profile"
+            style="width: 40px; height: 40px; border-radius: 50%;"
+          />
+        </a>
+      </div>
+    </header>
+    <main>
+      <h2><%= pageTitle %></h2>
+      <div class="story-container">
+        <% if (stories.length === 0) { %>
+          <p>No stories yet</p>
+        <% } else { %>
+          <% stories.forEach(story => { %>
+            <% if (story.public || story.userId === currentUserId) { %>
+              <div class="story-card">
+                <a href="/story/<%= story._id %>" style="text-decoration: none; color: inherit;">
+                  <h3><%= story.title %></h3>
+                  <p><%= story.description %></p>
+                </a>
+                <p class="genre"><strong>Genre:</strong> <%= story.genre %></p>
+                <p><strong>Likes:</strong> <%= story.likes %></p>
+                <% if (pageTitle !== "Your Stories") { %>
+                  <form action="/like/<%= story._id %>" method="post">
+                    <button type="submit" class="like-button">Like</button>
+                  </form>
+                <% } %>
+                <% if (story.userId === currentUserId) { %>
+                  <a href="/edit-story/<%= story._id %>" class="edit-button">Edit</a>
+                <% } %>
+              </div>
+            <% } %>
+          <% }) %>
+        <% } %>
+      </div>
+      <div class="submit-story" style="position: fixed; bottom: 20px; right: 20px;">
+        <a href="/submit-story" class="button" style="font-size: 34px; padding: 10px 20px; border-radius: 50%; background-color: #007BFF; color: white; text-align: center; text-decoration: none;">+</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    const genreButtons = document.querySelector('.genre-buttons');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    genreButtons.addEventListener('mousedown', (e) => {
+      isDown = true;
+      genreButtons.classList.add('active');
+      startX = e.pageX - genreButtons.offsetLeft;
+      scrollLeft = genreButtons.scrollLeft;
+    });
+
+    genreButtons.addEventListener('mouseleave', () => {
+      isDown = false;
+      genreButtons.classList.remove('active');
+    });
+
+    genreButtons.addEventListener('mouseup', () => {
+      isDown = false;
+      genreButtons.classList.remove('active');
+    });
+
+    genreButtons.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - genreButtons.offsetLeft;
+      const walk = (x - startX) * 3; //scroll-fast
+      genreButtons.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>
